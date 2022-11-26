@@ -24,8 +24,13 @@ async def contract(file: UploadFile):
         i.extract_text(visitor_text=visitor_body)
     words = []
     for i in parts:
-        words.extend(i.split(" "))
+        tmp = i.split(" ")
+        for j in tmp:
+            if j!= "" and j!="\n":
+                word = ''.join(c for c in j.lower() if (48<=ord(c)<=57 or 97<=ord(c)<=122))
+                words.append(word)
     print(words[:100])
     return {
-        "Number of Pages":len(pages)
+        "Number of Pages":len(pages),
+        "Warnings": 0
     }
