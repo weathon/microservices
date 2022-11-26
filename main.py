@@ -27,7 +27,7 @@ def analyzePDF(request_object_content):
         tmp = i.split(" ")
         for j in tmp:
             if j!= "" and j!="\n":
-                word = ''.join(c for c in j.lower() if (48<=ord(c)<=57 or 97<=ord(c)<=122))
+                word = ''.join(c for c in j.lower() if (48<=ord(c)<=57 or 97<=ord(c)<=122 or ord(c)==58))
                 words.append(word)
     return [len(pages),words]
 
@@ -37,5 +37,7 @@ from checkers import checkers
 async def contract(file: UploadFile):
     request_object_content = await file.read()
     numberOfPages, text = analyzePDF(request_object_content)
-    warnings = [checker(text) for checker in checkers]
+    print("landlord" in " ".join(text))
+    warnings = [checker(" ".join(text)) for checker in checkers]
+    print(warnings)
     return [warning for warning in warnings if warning != "Included"]

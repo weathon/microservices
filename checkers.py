@@ -5,23 +5,40 @@ def people(text):
     return "Included"
 
 def starting_date(text):
-    return "Included"
+    synonyms = ["starting date","move in date", "starts on:"]
+    for synonym in synonyms:
+        if synonym in text:
+            return "Included"
+    return "The starting date might be missing."
 
+def address(text):
+    return "Included"
 
 def end_date(text):
-    return "Included"
+    synonyms = ["continues on a month-to-month basis", "continues on another periodic basis", "a fixed term ending on"]
+    for synonym in synonyms:
+        if synonym in text:
+            return "Included"
+    return "The ending date might be missing."
+
 
 def rent_price(text):
-    return "Included"
+    return "Did not check for rent price!"
 
 def pay_day(text):
-    return "Included"
+    return "Did not check for pay_day!"
 
 def notice_before_rent_increase(text):
-    return "Included"   
+    synonyms = ["rent increase"]
+    for synonym in synonyms:
+        if synonym in text:
+            return "Included"
+    return "The rent increase policy might be missing."
 
 def security_deposit(text):
-    return "Included"
+    if "security deposit" in text:
+        return "Included"
+    return "The security deposit policy might be missing."
 
 def smoking(text):
     synonyms = ["smoking","cigarette","vape", "marijuana", "weed", "hemp", "cannabis"]
@@ -43,4 +60,4 @@ def utilities(text):
     return "The utilities policy might be missing."
 
 
-checkers = [people, end_date, starting_date, adress, rent_price, pay_day, notice_before_rent_increase, security_deposit, smoking, pet, utilities]
+checkers = [people, end_date, starting_date, address, rent_price, pay_day, notice_before_rent_increase, security_deposit, smoking, pet, utilities]
